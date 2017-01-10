@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+
+    <display_name>Visor de logs</display_name>
+    <icon>fa-file-text</icon>
+    <description>
+        Visor de logs
+    </description>
+    
+    <menu_caption>Logs</menu_caption>
+    <admin>
+        <menu_items>
+            <admin_menu_caption>Logs</admin_menu_caption>
+        </menu_items>
+    </admin>
+    
+    <index_title>Visor de logs</index_title>
+
+    <install_messages>
+        <setting_added>Variable '{$setting_name}' añadida con el valor '{$value}'.</setting_added>
+        <setting_deleted>Variable '{$setting_name}' eliminada.</setting_deleted>
+    </install_messages>
+    
+    <messages>
+        <no_logs_to_show>No hay logs que mostrar.</no_logs_to_show>
+        <select_a_log>Seelecciona un log</select_a_log>
+    </messages>
+    
+    <realtime_viewer_title>Visor de log en tiempo real</realtime_viewer_title>
+    
+    <no_log_provided>No se ha proporcionado un archivo de log a ver.</no_log_provided>
+    
+    <invalid_log_provided>El log no existe.</invalid_log_provided>
+    
+    <local_logs>Motor</local_logs>
+    
+    <settings_data>
+        <title>Visor de logs</title>
+        
+        <specs key="for_admins_only">
+            <title>¿Sólo para administradores?</title>
+            <description><![CDATA[
+                Habilita esta opción si deseas que sólo los usuarios con acceso administrativo puedan
+                accesar a este módulo.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+    </settings_data>
+    
+</language>

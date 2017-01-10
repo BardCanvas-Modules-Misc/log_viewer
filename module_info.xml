@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+    
+    <version>1.0</version>
+    <group>Tools</group>
+    
+    <working_flags>
+        <install>true</install>
+        <uninstall>true</uninstall>
+        <enable>true</enable>
+        <disable>true</disable>
+    </working_flags>
+    
+    <menu_items>
+        <item>
+            <caption_language_var>admin_menu_caption</caption_language_var>
+            <url></url>
+        </item>
+    </menu_items>
+    
+    <!-- Options are: html_head, pre_header, header, content_top, content_bottom, footer_top, footer_bottom, post_footer -->
+    <template_includes>
+        <pre_rendering>pre_rendering.inc</pre_rendering>
+        <header_menu>header_buttons.tpl.inc</header_menu>
+        <html_head>html_head.tpl.inc</html_head>
+        <post_footer>post_footer.tpl.inc</post_footer>
+    </template_includes>
+    
+    <extension_areas_info>
+        logs_browser: $logfiles on index needs to be extended by pre-injected file locations. 
+    </extension_areas_info>
+    
+</module>

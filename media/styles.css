@@ -1,0 +1,7 @@
+
+.realtime_log_output {
+    background-color: black; color: silver;
+    font-family: 'Lucida Console', 'Courier new', Courier, monospace;
+    font-size: 9pt; line-height: 5pt; padding: 10px; border: none;
+    margin: 0;
+}

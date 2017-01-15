@@ -37,5 +37,8 @@ $errors = array();
 
 $current_module->load_extensions("logs_browser", "logfiles_var");
 
+$title = $current_module->language->index_title;
+if( ! empty($_REQUEST["file"]) ) $title .= ": " . $_REQUEST["group"] . "/" . $_REQUEST["file"];
+$template->set_page_title($title);
 $template->page_contents_include = "contents/index.tpl.inc";
 include "{$template->abspath}/admin.php";

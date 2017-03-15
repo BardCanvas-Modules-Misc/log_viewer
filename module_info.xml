@@ -2,7 +2,7 @@
 <module>
     
     <version>1.0.3</version>
-    <group>Tools</group>
+    <group>modules_misc</group>
     
     <working_flags>
         <install>true</install>

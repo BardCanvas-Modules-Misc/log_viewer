@@ -104,15 +104,15 @@ foreach($logfiles as $log_group => $logs_in_group)
                         <?= $log_key ?>
                         [<?= number_format(filesize($this_logfile) / 1024, 2) ?> KiB]
                     </option>
-                
+                    
                 <? endforeach; ?>
-            
+                
             </select>
-        
+            
         <? endforeach; ?>
         
         <br>
-    
+        
     <? endforeach; ?>
 </div>
 

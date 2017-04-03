@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <language>
-
+    
     <display_name>Visor de logs</display_name>
     <icon>fa-file-text</icon>
     <description>
@@ -15,7 +15,7 @@
     </admin>
     
     <index_title>Visor de logs</index_title>
-
+    
     <install_messages>
         <setting_added>Variable '{$setting_name}' añadida con el valor '{$value}'.</setting_added>
         <setting_deleted>Variable '{$setting_name}' eliminada.</setting_deleted>
@@ -33,6 +33,7 @@
     <invalid_log_provided>El log no existe.</invalid_log_provided>
     
     <local_logs>Motor</local_logs>
+    <other>Otros</other>
     
     <settings_data>
         <title>Visor de logs</title>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <language>
-
+    
     <display_name>Logs viewer</display_name>
     <icon>fa-file-text</icon>
     <description>
@@ -15,7 +15,7 @@
     </admin>
     
     <index_title>Log viewer</index_title>
-
+    
     <install_messages>
         <setting_added>Setting '{$setting_name}' added with value = '{$value}'.</setting_added>
         <setting_deleted>Setting '{$setting_name}' deleted.</setting_deleted>
@@ -31,8 +31,9 @@
     <no_log_provided>No log file to view has been provided.</no_log_provided>
     
     <invalid_log_provided>The log file to view doesn't exist.</invalid_log_provided>
-
-    <local_logs>Motor</local_logs>
+    
+    <local_logs>Engine</local_logs>
+    <other>Other</other>
     
     <settings_data>
         <title>Logs viewer</title>

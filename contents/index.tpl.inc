@@ -6,50 +6,17 @@
  * @subpackage log_viewer
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  *
+ * @var module $current_module
  * @var array  $logfiles       [container_path][file_key] := filename
  * @var string $selected_log
  */
 
+use hng2_base\module;
 use hng2_tools\cli;
-?>
-<style type="text/css">
-    .log_picker select { max-width: 150px; }
-    .log_output { background-color: black; color: silver; font-family: 'Lucida Console', 'Courier new', Courier, monospace;
-                  font-size: 9pt; line-height: 5pt; padding: 10px; border: 2px inset silver; border-radius: 10px; }
-    .group_separator { display: inline-block; font-weight: bold; }
-</style>
 
-<h1 class="clearfix">
-    <a class="pull-right" href="<?=$_SERVER["PHP_SELF"]?>?group=<?=urlencode(stripslashes($_REQUEST["group"]))?>&file=<?=urlencode(stripslashes($_REQUEST["file"]))?>&wasuuup=<?=md5(mt_rand(1, 65535))?>">
-        <span class="fa fa-refresh"></span>
-        <?= $language->refresh ?>
-    </a>
-    <?
-    echo $current_module->language->index_title;
-    if( ! empty($_REQUEST["file"]) ) echo ": " . $_REQUEST["group"] . "/" . $_REQUEST["file"];
-    ?>
-    <br clear="all">
-</h1>
-
-<? if ( ! empty($errors)): ?>
-    <div class="framed_content state_ko">
-        <? foreach($errors as $error): ?>
-            <span class="fa fa-warning"></span>
-            <?= $error ?><br>
-        <? endforeach; ?>
-    </div>
-<? endif; ?>
-
-<? if (empty($logfiles)): ?>
-    <div class="framed_content state_warning">
-        <span class="fa fa-info-circle"></span>
-        <?= $current_module->language->messages->no_logs_to_show ?>
-    </div>
-    <? return; ?>
-<? endif; ?>
-
-<?
+/** @var array $subgrouped_logs [$log_group][$subgroup_name][$log_key] => $logfile_path */
 $subgrouped_logs = array();
+
 foreach($logfiles as $log_group => $logs_in_group)
 {
     foreach($logs_in_group as $log_key => $this_logfile)
@@ -73,23 +40,74 @@ foreach($logfiles as $log_group => $logs_in_group)
         ksort($subgrouped_logs[$log_group]);
     }
 }
+
+/** @var array $custom_views ["Link_caption"] => "extension_handler" */
+$custom_views = array();
+$page_title   = $current_module->language->index_title;
+$current_module->load_extensions("logs_browser", "pre_rendering");
 ?>
+<style type="text/css">
+    .log_picker select { max-width: 150px; }
+    .log_output { background-color: black; color: silver; font-family: 'Lucida Console', 'Courier new', Courier, monospace;
+                  font-size: 9pt; line-height: 5pt; padding: 10px; border: 2px inset silver; border-radius: 10px; }
+    .group_separator { display: inline-block; font-weight: bold; clear: both; }
+</style>
+
+<h1 class="clearfix">
+    <?
+    $url = "{$_SERVER["PHP_SELF"]}"
+        . "?group="       . urlencode(stripslashes($_REQUEST["group"])) 
+        . "&file="        . urlencode(stripslashes($_REQUEST["file"]))
+        . "&custom_view=" . urlencode(stripslashes($_GET["custom_view"]))
+        . "&wasuuup="     . md5(mt_rand(1, 65535))
+    ;
+    ?>
+    <button id="refresh_current_log" class="pull-right" onclick="location.href = '<?= $url ?>'">
+        <span class="fa fa-refresh"></span>
+        <?= $language->refresh ?>
+    </button>
+    <?
+    echo $page_title;
+    if( ! empty($_REQUEST["file"]) ) echo ": " . $_REQUEST["group"] . "/" . $_REQUEST["file"];
+    ?>
+    <br clear="all">
+</h1>
+
+<? if ( ! empty($errors)): ?>
+    <div class="framed_content state_ko">
+        <? foreach($errors as $error): ?>
+            <span class="fa fa-warning"></span>
+            <?= $error ?><br>
+        <? endforeach; ?>
+    </div>
+<? endif; ?>
+
+<? if (empty($logfiles)): ?>
+    <div class="framed_content state_warning">
+        <span class="fa fa-info-circle"></span>
+        <?= $current_module->language->messages->no_logs_to_show ?>
+    </div>
+    <? return; ?>
+<? endif; ?>
 
 <div class="log_picker framed_content">
     <? foreach($subgrouped_logs as $log_group => $subgroups): ?>
         
-        <span class="group_separator"><?=ucwords(str_replace("_", " ", $log_group))?>:</span>
+        <? if( count($subgrouped_logs) > 1 ): ?>
+            <span class="group_separator"><?=ucwords(str_replace("_", " ", $log_group))?>:</span>
+        <? endif; ?>
         
         <? foreach($subgroups as $subgroup_name => $logs_in_group):
-            if( $subgroup_name == "ZZZZZZZZZZZZZZZZZZ" ) $subgroup_name = "Others";
+            if( $subgroup_name == "ZZZZZZZZZZZZZZZZZZ" ) $subgroup_name = trim($current_module->language->other);
             $called_log_is_here = isset($logs_in_group[$_REQUEST["file"]]); ?>
             
             <select onchange="location.href = this.options[this.selectedIndex].value" style="margin-bottom: 5px; <? if($called_log_is_here) echo "background-color: Highlight; color: HighlightText;"; ?>">
                 
                 <option disabled <? if( ! $called_log_is_here ) echo "selected"; ?> style="background-color: Window; color: ButtonShadow;"><?= $subgroup_name ?></option>
                 
-                <? arsort($logs_in_group); ?>
-                <? foreach($logs_in_group as $log_key => $this_logfile):
+                <?
+                arsort($logs_in_group);
+                foreach($logs_in_group as $log_key => $this_logfile):
                     if( $log_key == $_REQUEST["file"] )
                         $style = "background-color: Highlight; color: HighlightText;";
                     elseif (stristr($log_key, date("Ymd")) !== false)
@@ -102,7 +120,7 @@ foreach($logfiles as $log_group => $logs_in_group)
                             value="<?=$_SERVER["PHP_SELF"]?>?group=<?=urlencode($log_group)?>&file=<?=urlencode($log_key)?>&wasuuup=<?=md5(mt_rand(1, 65535))?>"
                             style="<?= $style ?>">
                         <?= $log_key ?>
-                        [<?= number_format(filesize($this_logfile) / 1024, 2) ?> KiB]
+                        <? if( file_exists($this_logfile) ) echo sprintf("[%s KiB]", number_format(filesize($this_logfile) / 1024, 2)); ?>
                     </option>
                     
                 <? endforeach; ?>
@@ -111,10 +129,24 @@ foreach($logfiles as $log_group => $logs_in_group)
             
         <? endforeach; ?>
         
-        <br>
-        
     <? endforeach; ?>
+    
+    <? if( count($subgrouped_logs) > 1 && ! empty($custom_views) ): ?>
+        <span class="group_separator"><?= $current_module->language->other ?>:</span>
+    <? endif; ?>
+    
+    <? foreach($custom_views as $caption => $key):
+        $class = $_GET["custom_view"] == $key ? "state_active" : ""; ?>
+        <a class="framed_content <?= $class ?> inlined" style="text-decoration: none;"
+           href="<?= $_SERVER["PHP_SELF"] ?>?custom_view=<?= $key ?>&wasuuup=<?= md5(mt_rand(1, 65535)) ?>"><?= $caption ?></a>
+    <? endforeach; ?>
+    
 </div>
+
+<?
+$current_module->load_extensions("logs_browser", "custom_view");
+if( ! empty($_GET["custom_view"]) ) return;
+?>
 
 <? if( empty($_GET["group"]) && empty($_GET["file"]) ) : ?>
     
@@ -128,8 +160,14 @@ foreach($logfiles as $log_group => $logs_in_group)
 endif;
 
 $selected_log = $logfiles[$_GET["group"]][$_GET["file"]];
-$contents     = file_get_contents($selected_log);
-$contents     = cli::to_html($contents);
+if( ! is_file($selected_log) )
+    die("
+        <div class=\"framed_content state_ko\">
+            {$current_module->language->invalid_log_provided}
+        </div>
+    ");
 
+$contents = file_get_contents($selected_log);
+$contents = cli::to_html($contents);
 ?>
 <pre class="log_output"><?=$contents?></pre>

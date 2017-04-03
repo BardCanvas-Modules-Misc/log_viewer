@@ -27,7 +27,8 @@
     </template_includes>
     
     <extension_areas_info>
-        logs_browser: $logfiles on index needs to be extended by pre-injected file locations. 
+        Logs index: $logfiles vars injection.
+        Logs browser: $subgrouped_logs vars injections and custom views instead of standard CLI to HTML converter.
     </extension_areas_info>
     
 </module>

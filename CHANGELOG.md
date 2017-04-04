@@ -1,7 +1,7 @@
 
 # Logs Viewer Module Change Log
 
-## [Unreleased]
+## [1.0.4] - 2017-04-03
 
 - Added changelog.
 - Fixed wrong entries in language files and added others.

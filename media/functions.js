@@ -29,6 +29,12 @@ function launch_realtime_log_viewer(log, is_incremental)
             if( realtime_log_fetching_interval ) clearTimeout(realtime_log_fetching_interval);
             $(this).dialog('destroy');
             
+            if( typeof $(this).data('on-close-exec-function') == 'function' )
+            {
+                var fn = $(this).data('on-close-exec-function');
+                fn();
+            }
+            
             if( $(this).data('on-close-redirect-url') )
             {
                 stop_notifications_getter();
@@ -52,7 +58,7 @@ function update_realtime_log_fetching()
     var log             = $container.attr('data-log');
     var previous_length = parseInt($container.attr('data-previous-length'));
     
-    var url = root_url
+    var url = $_FULL_ROOT_PATH
             + '/log_viewer/get_log.php'
             + '?logfile='  + encodeURIComponent(log)
             + '&offset='   + previous_length

@@ -22,7 +22,7 @@ foreach($logfiles as $log_group => $logs_in_group)
     foreach($logs_in_group as $log_key => $this_logfile)
     {
         $log_key = preg_replace('/([\d]{4}) +([\d]{2}) +([\d]{2})/', '\1\2\3', $log_key);
-        $log_key = preg_replace('/([\d]{8}) +([\d]{6})/', '\1-\2', $log_key);
+        # $log_key = preg_replace('/([\d]{8}) +([\d]{6})/', '\1-\2', $log_key);
         $parts = explode(" ", $log_key);
         if( is_numeric(end($parts)) )
         {

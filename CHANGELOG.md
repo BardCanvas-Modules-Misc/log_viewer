@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.0.6] - 2017-06-19
+
+- Fixed issue on list builder.
+
 ## [1.0.5] - 2017-06-12
 
 - Fixed path issues and added callback function support to real time log viewer.

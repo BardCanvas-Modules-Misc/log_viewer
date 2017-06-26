@@ -27,6 +27,7 @@ foreach($logfiles as $log_group => $logs_in_group)
         if( is_numeric(end($parts)) )
         {
             array_pop($parts);
+            if( is_numeric(end($parts)) ) array_pop($parts);
             $subgroup_name = implode(" ", $parts);
         }
         else

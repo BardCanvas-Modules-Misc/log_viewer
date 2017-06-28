@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.0.7] - 2017-06-27
+
+- Tuned viewer subgrouping.
+
 ## [1.0.6] - 2017-06-19
 
 - Fixed issue on list builder.

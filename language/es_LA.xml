@@ -35,6 +35,8 @@
     <local_logs>Motor</local_logs>
     <other>Otros</other>
     
+    <live_view>Vista en tiempo real</live_view>
+    
     <settings_data>
         <title>Visor de logs</title>
         

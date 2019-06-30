@@ -35,6 +35,8 @@
     <local_logs>Engine</local_logs>
     <other>Other</other>
     
+    <live_view>Live view</live_view>
+    
     <settings_data>
         <title>Logs viewer</title>
         

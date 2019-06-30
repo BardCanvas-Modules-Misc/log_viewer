@@ -46,6 +46,8 @@ foreach($logfiles as $log_group => $logs_in_group)
 $custom_views = array();
 $page_title   = $current_module->language->index_title;
 $current_module->load_extensions("logs_browser", "pre_rendering");
+
+$selected_log = $logfiles[$_GET["group"]][$_GET["file"]];
 ?>
 <style type="text/css">
     .log_picker select { max-width: 150px; }
@@ -69,9 +71,20 @@ $current_module->load_extensions("logs_browser", "pre_rendering");
     </button>
     <?
     echo $page_title;
-    if( ! empty($_REQUEST["file"]) ) echo ": " . $_REQUEST["group"] . "/" . $_REQUEST["file"];
+    if( ! empty($_REQUEST["file"]) ):
+        echo ": " . $_REQUEST["group"] . "/" . $_REQUEST["file"];
+        
+        if( ! empty($selected_log) && is_file($selected_log) ):
+            $incremental = filesize($selected_log) <= (1024 * 1024) ? "true" : "false";
+            ?>
+            <button onclick="$('#realtime_log_viewer').data('on-close-exec-function', function() { $('#refresh_current_log').click(); }); launch_realtime_log_viewer('<?= basename($selected_log) ?>', <?= $incremental ?>)">
+                <i class="fa fa-window-maximize"></i>
+                <?= $current_module->language->live_view ?>
+            </button>
+            <?
+        endif;
+    endif;
     ?>
-    <br clear="all">
 </h1>
 
 <? if ( ! empty($errors)): ?>
@@ -166,7 +179,6 @@ if( ! empty($_GET["custom_view"]) ) return;
     return;
 endif;
 
-$selected_log = $logfiles[$_GET["group"]][$_GET["file"]];
 if( ! is_file($selected_log) )
     die("
         <div class=\"framed_content state_ko\">

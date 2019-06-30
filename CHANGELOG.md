@@ -1,6 +1,11 @@
 
 # Logs Viewer Module Change Log
 
+## [1.1.0] - 2019-06-30
+
+- Added 100 items limit to lists.
+- Added "live view" launcher for selected log.
+
 ## [1.0.7] - 2017-06-27
 
 - Tuned viewer subgrouping.

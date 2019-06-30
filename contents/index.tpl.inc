@@ -108,6 +108,7 @@ $current_module->load_extensions("logs_browser", "pre_rendering");
                 
                 <?
                 arsort($logs_in_group);
+                $rendered = 0;
                 foreach($logs_in_group as $log_key => $this_logfile):
                     if( $log_key == $_REQUEST["file"] )
                         $style = "background-color: Highlight; color: HighlightText;";
@@ -124,7 +125,12 @@ $current_module->load_extensions("logs_browser", "pre_rendering");
                         <? if( file_exists($this_logfile) ) echo sprintf("[%s KiB]", number_format(filesize($this_logfile) / 1024, 2)); ?>
                     </option>
                     
-                <? endforeach; ?>
+                    <?
+                    $rendered++;
+                    
+                    if( $rendered > 100 ) break;
+                endforeach;
+                ?>
                 
             </select>
             

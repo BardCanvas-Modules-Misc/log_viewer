@@ -75,9 +75,8 @@ $selected_log = $logfiles[$_GET["group"]][$_GET["file"]];
         echo ": " . $_REQUEST["group"] . "/" . $_REQUEST["file"];
         
         if( ! empty($selected_log) && is_file($selected_log) ):
-            $incremental = filesize($selected_log) <= (1024 * 1024) ? "true" : "false";
             ?>
-            <button onclick="$('#realtime_log_viewer').data('on-close-exec-function', function() { $('#refresh_current_log').click(); }); launch_realtime_log_viewer('<?= basename($selected_log) ?>', <?= $incremental ?>)">
+            <button onclick="$('#realtime_log_viewer').data('on-close-exec-function', function() { $('#refresh_current_log').click(); }); launch_realtime_log_viewer('<?= basename($selected_log) ?>')">
                 <i class="fa fa-window-maximize"></i>
                 <?= $current_module->language->live_view ?>
             </button>

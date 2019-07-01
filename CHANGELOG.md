@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.1.1] - 2019-07-01
+
+- Removed bugged incremental mode from live viewer.
+
 ## [1.1.0] - 2019-06-30
 
 - Added 100 items limit to lists.

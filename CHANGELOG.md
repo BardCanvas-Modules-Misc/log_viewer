@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.2.0] - 2020-04-29
+
+- Major output tuning.
+
 ## [1.1.1] - 2019-07-01
 
 - Removed bugged incremental mode from live viewer.

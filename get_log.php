@@ -40,4 +40,4 @@ if( ! file_exists($log) ) die($current_module->language->invalid_log_provided);
 
 $contents = file_get_contents($log);
 $html = cli::to_html($contents);
-echo $html;
+echo str_replace("<br>", "", $html);

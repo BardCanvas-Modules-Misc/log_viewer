@@ -51,9 +51,8 @@ $selected_log = $logfiles[$_GET["group"]][$_GET["file"]];
 ?>
 <style type="text/css">
     .log_picker select { max-width: 150px; }
-    .log_output { background-color: black; color: silver; font-family: 'Lucida Console', 'Courier new', Courier, monospace;
-                  font-size: 9pt; line-height: 5pt; padding: 10px; border: 2px inset silver; border-radius: 10px; }
-    .group_separator { display: inline-block; font-weight: bold; clear: both; }
+    .log_output        { border: 2px inset silver; border-radius: 5px; }
+    .group_separator   { display: inline-block; font-weight: bold; clear: both; }
 </style>
 
 <h1 class="clearfix">
@@ -188,4 +187,4 @@ if( ! is_file($selected_log) )
 $contents = file_get_contents($selected_log);
 $contents = cli::to_html($contents);
 ?>
-<pre class="log_output"><?=$contents?></pre>
+<pre class="log_output"><?= str_replace("<br>", "", $contents) ?></pre>

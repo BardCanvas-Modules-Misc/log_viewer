@@ -22,7 +22,7 @@ function launch_realtime_log_viewer(log, is_incremental)
     $dialog.find('.realtime_log_output').html(wait_caption);
     
     $dialog.dialog({
-        width:  $(window).width() - 100,
+        width:  $(window).width()  - 100,
         height: $(window).height() - 100,
         close:  function()
         {
@@ -32,7 +32,7 @@ function launch_realtime_log_viewer(log, is_incremental)
             if( typeof $(this).data('on-close-exec-function') == 'function' )
             {
                 var fn = $(this).data('on-close-exec-function');
-                fn();
+                if( fn ) fn();
             }
             
             if( $(this).data('on-close-redirect-url') )
@@ -81,7 +81,7 @@ function update_realtime_log_fetching()
         realtime_log_fetching_getting = false;
         
         // console.log('Realtime Log Viewer> previous length: ', previous_length, ' / incoming data length: ', new_length , ' / new length: ', storing_length);
-        if( previous_length != storing_length ) $dialog.scrollTo('max');
+        if( previous_length !== storing_length ) $dialog.scrollTo('max', 'fast', {axis: 'y'});
 
         realtime_log_fetching_interval = setTimeout("update_realtime_log_fetching()", realtime_log_fetching_heartbeat);
     });

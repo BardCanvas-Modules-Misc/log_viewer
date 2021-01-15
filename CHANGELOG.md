@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.2.1] - 2021-01-14
+
+- Tweaked live view invoker to allow viewing subgrouped logs.
+
 ## [1.2.0] - 2020-04-29
 
 - Major output tuning.

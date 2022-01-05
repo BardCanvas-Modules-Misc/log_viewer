@@ -31,13 +31,13 @@ if( substr($_REQUEST["logfile"], 0, 11) == "internal://" )
     
     $_REQUEST["logfile"] .= "&offset="   . $_REQUEST["offset"];
     
-    $contents = file_get_contents($_REQUEST["logfile"]);
+    $contents = htmlspecialchars(file_get_contents($_REQUEST["logfile"]));
     die($contents);
 }
 
 $log = "{$config->logfiles_location}/{$_REQUEST["logfile"]}";
 if( ! file_exists($log) ) die($current_module->language->invalid_log_provided);
 
-$contents = file_get_contents($log);
+$contents = htmlspecialchars(file_get_contents($log));
 $html = cli::to_html($contents);
 echo str_replace("<br>", "", $html);

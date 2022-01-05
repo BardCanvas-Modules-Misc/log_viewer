@@ -185,7 +185,7 @@ if( ! is_file($selected_log) )
         </div>
     ");
 
-$contents = file_get_contents($selected_log);
+$contents = htmlspecialchars(file_get_contents($selected_log));
 $contents = cli::to_html($contents);
 ?>
 <pre class="log_output"><?= str_replace("<br>", "", $contents) ?></pre>

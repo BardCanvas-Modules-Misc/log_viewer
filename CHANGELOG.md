@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.2.2] - 2022-01-05
+
+- Added output filtering.
+
 ## [1.2.1] - 2021-01-14
 
 - Tweaked live view invoker to allow viewing subgrouped logs.

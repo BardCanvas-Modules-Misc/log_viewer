@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.2.3] - 2022-01-28
+
+- Added input sanitization.
+
 ## [1.2.2] - 2022-01-05
 
 - Added output filtering.

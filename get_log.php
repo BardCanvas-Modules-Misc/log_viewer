@@ -35,10 +35,7 @@ if( substr($_REQUEST["logfile"], 0, 11) == "internal://" )
     die($contents);
 }
 
-if( preg_match(
-    '@.php|.inc|.xml|.dat|.sql|.ht|/home|/etc|/bin|\.\./|\./|@i',
-    $_REQUEST["logfile"])
-) throw_fake_501();
+if( end(explode(".", $_REQUEST["logfile"])) != ".log" ) throw_fake_501();
 
 $log = "{$config->logfiles_location}/{$_REQUEST["logfile"]}";
 if( ! file_exists($log) ) die($current_module->language->invalid_log_provided);

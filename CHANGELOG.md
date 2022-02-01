@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.2.5] - 2022-02-01
+
+- Fixed wrong filter in the log getter.
+
 ## [1.2.4] - 2022-02-01
 
 - Tuned input sanitization.

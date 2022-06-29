@@ -22,7 +22,7 @@ $logfiles = array();
 $existing_logs = glob( ROOTPATH . "/logs/*.log" );
 foreach ($existing_logs as $this_log)
 {
-    if (filesize($this_log) == 0) continue;
+    if (@filesize($this_log) == 0) continue;
     
     $file_key = ucwords(str_replace(
         array(".log", "_", "-"),

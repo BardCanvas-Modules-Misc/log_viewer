@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.2.6] - 2022-07-01
+
+- Added warning suppresion when building the logs index.
+
 ## [1.2.5] - 2022-02-01
 
 - Fixed wrong filter in the log getter.

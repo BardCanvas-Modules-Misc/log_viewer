@@ -1,6 +1,10 @@
 
 # Logs Viewer Module Change Log
 
+## [1.2.7] - 2025-02-02
+
+- Added checks to log pulling segments.
+
 ## [1.2.6] - 2022-07-01
 
 - Added warning suppresion when building the logs index.

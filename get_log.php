@@ -38,6 +38,10 @@ if( substr($_REQUEST["logfile"], 0, 11) == "internal://" )
 if( end(explode(".", $_REQUEST["logfile"])) != "log" ) throw_fake_501();
 
 $log = "{$config->logfiles_location}/{$_REQUEST["logfile"]}";
+$rlp = realpath($log);
+$drt = $_SERVER["DOCUMENT_ROOT"];
+$len = strlen($drt);
+if( substr($rlp, 0, $len) != $drt ) die($current_module->language->invalid_log_provided);
 if( ! file_exists($log) ) die($current_module->language->invalid_log_provided);
 
 $contents = htmlspecialchars(file_get_contents($log));

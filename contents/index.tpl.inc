@@ -48,6 +48,12 @@ $page_title   = $current_module->language->index_title;
 $current_module->load_extensions("logs_browser", "pre_rendering");
 
 $selected_log = $logfiles[$_GET["group"]][$_GET["file"]];
+
+$rlp = realpath($selected_log);
+$drt = $_SERVER["DOCUMENT_ROOT"];
+$len = strlen($drt);
+if( substr($rlp, 0, $len) != $drt ) $errors[] = $current_module->language->invalid_log_provided;
+
 ?>
 <style type="text/css">
     .log_picker select { max-width: 150px; }
